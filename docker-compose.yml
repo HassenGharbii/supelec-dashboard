@@ -1,0 +1,161 @@
+version: '3.8'
+
+services:
+  db:
+    hostname: db
+    image: mysql
+    restart: always
+    expose:
+      - "3306"
+    ports:
+      - "3307:3306"   
+    networks:
+      - vlan100  # Add DB to VLAN 100 for now
+    environment:
+      MYSQL_DATABASE: supelecdb
+      MYSQL_ALLOW_EMPTY_PASSWORD: ok
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: supelecadmin
+      MYSQL_PASSWORD: supelecadmin
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - db_data:/var/lib/mysql  # Mounts the volume "db_data" to MySQL's data directory
+
+  python-api:
+    hostname: python-api
+    build:
+      context: ./supelec/data_collector 
+    container_name: python_api
+    ports:
+      - "5000:5000"  
+    networks:
+      - vlan100 
+      - vlan200 # Add Python API to VLAN 100
+    depends_on:
+      - db  
+  react-app:
+    build:
+      context: ./supelec
+      dockerfile: front.Dockerfile  # Ensure this file exists in ./supelec
+    container_name: react_app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - vlan100
+      - vlan200
+    depends_on:
+      - node-server
+
+
+  node-server:
+    build:
+      context: ./supelec
+      dockerfile: Dockerfile
+    container_name: node_server
+    ports:
+      - "5001:5001" 
+    networks:
+      - vlan100 
+      - vlan200 
+    depends_on:
+      - db
+  
+    
+
+
+  3850-HM-0-16-Surete:
+    image: alpine
+    container_name: 3850-HM-0-16-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.10
+
+  2960X-HM.0.25-Surete-1:
+    image: alpine
+    container_name: 2960X-HM.0.25-Surete-1
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.16
+  2960X-HM.0.25-Surete-2:
+    image: alpine
+    container_name: 2960X-HM.0.25-Surete-2
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.17
+  2960X-VV.0.26-Surete:
+    image: alpine
+    container_name: 2960X-VV.0.26-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.18
+  2960X-VV.0.82-Surete:
+    image: alpine
+    container_name: 2960X-VV.0.82-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.19
+  2960X-D5.0.20-Surete:
+    image: alpine
+    container_name: 2960X-D5.0.20-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.20
+  2960X-HM.0.16-Surete:
+    image: alpine
+    container_name: 2960X-HM.0.16-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.11
+  2960X-Z1.S.05-Surete:
+    image: alpine
+    container_name: 2960X-Z1.S.05-Surete
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.12
+  2960X-F6.1.04-Surete-1:
+    image: alpine
+    container_name: 2960X-F6.1.04-Surete-1
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.21
+  2960X-F6.1.04-Surete-2:
+    image: alpine
+    container_name: 2960X-F6.1.04-Surete-2
+
+    command: tail -F anything
+    networks:
+      vlan100:
+        ipv4_address: 172.30.0.22
+
+
+
+  
+
+volumes:
+  db_data: 
+
+networks:
+  vlan100:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/22
+
+  vlan200:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.31.0.0/22
