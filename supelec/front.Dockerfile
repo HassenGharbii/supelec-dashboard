@@ -1,7 +1,7 @@
 # Dockerfile for React app
 
 # Use the official Node.js image with version 16 (or the version compatible with your app)
-FROM node:16-alpine
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app

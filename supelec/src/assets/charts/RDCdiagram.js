@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "react-flow-renderer";
 import { Handle } from "react-flow-renderer";
 import axios from "axios";
+import './ReactFlowStyles.css'; // Import the CSS file
+
 
 const switches = [
   { id: "2960X-HM.0.25-Surete-1", ip_address: "172.30.0.16" },
@@ -86,7 +88,7 @@ const initialNodes = [
               left: "1px",
             }}
           />
-               <Handle
+          <Handle
             type="target"
             id="14"
             position="left"
@@ -97,7 +99,7 @@ const initialNodes = [
               left: "1px",
             }}
           />
-               <Handle
+          <Handle
             type="target"
             id="1"
             position="left"
@@ -108,7 +110,7 @@ const initialNodes = [
               left: "1px",
             }}
           />
-                <Handle
+          <Handle
             type="source"
             id="16"
             position="left"
@@ -146,7 +148,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-           3850-Bâtimentaire
+            3850-Bâtimentaire
 
           </div>
           <div
@@ -161,8 +163,8 @@ const initialNodes = [
 
 
           </div>
-        
-               <Handle
+
+          <Handle
             type="target"
             id="1"
             position="left"
@@ -173,7 +175,7 @@ const initialNodes = [
               left: "1px",
             }}
           />
-                  <Handle
+          <Handle
             type="target"
             id="2"
             position="left"
@@ -211,7 +213,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-           3850-Bâtimentaire-2
+            3850-Bâtimentaire-2
 
           </div>
           <div
@@ -225,8 +227,8 @@ const initialNodes = [
             NA
 
           </div>
-        
-               <Handle
+
+          <Handle
             type="target"
             id="1"
             position="left"
@@ -264,7 +266,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-           3850-Bâtimentaire-3
+            3850-Bâtimentaire-3
 
           </div>
           <div
@@ -278,8 +280,8 @@ const initialNodes = [
             NA
 
           </div>
-        
-               <Handle
+
+          <Handle
             type="source"
             id="1"
             position="left"
@@ -317,7 +319,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-           3850-Bâtimentaire-4
+            3850-Bâtimentaire-4
 
           </div>
           <div
@@ -331,8 +333,8 @@ const initialNodes = [
             NA
 
           </div>
-        
-               <Handle
+
+          <Handle
             type="target"
             id="1"
             position="left"
@@ -356,7 +358,7 @@ const initialNodes = [
     },
     connectable: false,
   },
-  
+
   //floors effel
   {
     id: "Bâtiment Eiffel",
@@ -1173,7 +1175,7 @@ const initialNodes = [
               left: "50px",
             }}
           />
-          
+
         </div>
       ),
     },
@@ -1384,8 +1386,8 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-          
-           <Handle
+
+          <Handle
             type="source"
             id="Gi1/0/4"
             position="left"
@@ -1397,7 +1399,7 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-           <Handle
+          <Handle
             type="source"
             id="Gi1/0/3"
             position="left"
@@ -1409,7 +1411,7 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-           <Handle
+          <Handle
             type="source"
             id="Gi1/0/2"
             position="left"
@@ -1421,7 +1423,7 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-           <Handle
+          <Handle
             type="source"
             id="Gi1/0/1"
             position="left"
@@ -1433,10 +1435,10 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-            <Handle
+          <Handle
             type="source"
             id="Te1/1/4"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1445,10 +1447,10 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-            <Handle
+          <Handle
             type="source"
             id="Te1/1/3"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1457,7 +1459,7 @@ const initialNodes = [
               transform: "translateX(-50%)",
             }}
           />
-            <Handle
+          <Handle
             type="source"
             id="13"
             style={{
@@ -1734,7 +1736,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-            fibre 
+            fibre
           </div>
           <div
             style={{
@@ -1749,7 +1751,7 @@ const initialNodes = [
           <Handle
             id="GTB1/1"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1757,10 +1759,10 @@ const initialNodes = [
               left: "70px",
             }}
           />
-              <Handle
+          <Handle
             id="GTB1/2"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1768,10 +1770,10 @@ const initialNodes = [
               left: "40px",
             }}
           />
-              <Handle
+          <Handle
             id="GTB1/3"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1779,10 +1781,10 @@ const initialNodes = [
               left: "10px",
             }}
           />
-            <Handle
+          <Handle
             id="GTB1"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1790,10 +1792,10 @@ const initialNodes = [
               left: "70px",
             }}
           />
-              <Handle
+          <Handle
             id="GTB2"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1801,10 +1803,10 @@ const initialNodes = [
               left: "40px",
             }}
           />
-              <Handle
+          <Handle
             id="4500"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1854,7 +1856,7 @@ const initialNodes = [
           <Handle
             id="GTB1/1T"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1862,10 +1864,10 @@ const initialNodes = [
               left: "70px",
             }}
           />
-              <Handle
+          <Handle
             id="GTB1/2T"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1873,10 +1875,10 @@ const initialNodes = [
               left: "40px",
             }}
           />
-              <Handle
+          <Handle
             id="GTB1/3T"
             type="target"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1884,10 +1886,10 @@ const initialNodes = [
               left: "10px",
             }}
           />
-                   <Handle
+          <Handle
             id="15"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1895,10 +1897,10 @@ const initialNodes = [
               left: "70px",
             }}
           />
-              <Handle
+          <Handle
             id="14"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1906,10 +1908,10 @@ const initialNodes = [
               left: "40px",
             }}
           />
-              <Handle
+          <Handle
             id="1"
             type="source"
-            
+
             style={{
               background: "#555",
               position: "absolute",
@@ -1967,7 +1969,7 @@ const initialNodes = [
               left: "60px",
             }}
           />
-           <Handle
+          <Handle
             id="14"
             type="target"
             position="left"
@@ -1978,7 +1980,7 @@ const initialNodes = [
               left: "40px",
             }}
           />
-               <Handle
+          <Handle
             id="1"
             type="target"
             position="left"
@@ -1989,7 +1991,7 @@ const initialNodes = [
               left: "10px",
             }}
           />
-                 <Handle
+          <Handle
             id="P-1"
             type="source"
             position="left"
@@ -2000,7 +2002,7 @@ const initialNodes = [
               left: "80px",
             }}
           />
-           <Handle
+          <Handle
             id="P-2"
             type="source"
             position="left"
@@ -2011,7 +2013,7 @@ const initialNodes = [
               left: "80px",
             }}
           />
-               <Handle
+          <Handle
             id="P-3"
             type="source"
             position="left"
@@ -2585,12 +2587,19 @@ const RDCDiagram = ({ switchers }) => {
         background: "#1F2937",
       }}
     >
-      <ReactFlow nodes={nodes} edges={edgesState} fitView>
-        <MiniMap nodeColor={() => "#1E293B"} />
+     <ReactFlow
+  nodes={nodes}
+  edges={edgesState}
+  fitView
+  proOptions={{ hideAttribution: true }}
+>
+  <Background />
+</ReactFlow>
 
-        <Controls />
-        <Background />
-      </ReactFlow>
+
+
+
+
     </div>
   );
 };

@@ -77,66 +77,76 @@ const initialize = async () => {
 };
 
 // Ping an IP and save results to the database
-app.post('/add-host', async (req, res) => {
-  const { ip_address, hostname, department } = req.body;  // Add department here
-  if (!ip_address || !hostname || !department) {
-    return res.status(400).send('IP address, hostname, and department are required');
+app.post('/add-hosts', async (req, res) => {
+  const hosts = req.body.hosts; // Expecting an array of hosts in the request body
+  
+  if (!Array.isArray(hosts) || hosts.length === 0) {
+    return res.status(400).send('An array of hosts is required');
   }
 
   try {
-    const pingResponse = await axios.post('http://python-api:5000/ping', { ips: [ip_address] });
-    const pingResult = pingResponse.data[ip_address]; 
+    for (const host of hosts) {
+      const { ip_address, hostname, department } = host; // Destructure each host
+      
+      if (!ip_address || !hostname || !department) {
+        return res.status(400).send('Each host must have an IP address, hostname, and department');
+      }
 
-    const { success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms } = pingResult;
+      const pingResponse = await axios.post('http://python-api:5000/ping', { ips: [ip_address] });
+      const pingResult = pingResponse.data[ip_address]; 
 
-    const connection = await pool.getConnection();
+      const { success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms } = pingResult;
 
-    const query = `
-      INSERT INTO host_pings (ip_address, hostname, department, success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-    `;
+      const connection = await pool.getConnection();
 
-    await connection.query(query, [
-      ip_address,
-      hostname,
-      department,  // Include department in the query
-      success_percentage,
-      packet_loss,
-      min_rtt_ms,
-      max_rtt_ms,
-      avg_rtt_ms
-    ]);
+      const query = `
+        INSERT INTO host_pings (ip_address, hostname, department, success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+      `;
 
-    connection.release();
-    res.status(200).send({ message: 'Host added and ping results saved successfully' });
+      await connection.query(query, [
+        ip_address,
+        hostname,
+        department,  // Include department in the query
+        success_percentage,
+        packet_loss,
+        min_rtt_ms,
+        max_rtt_ms,
+        avg_rtt_ms
+      ]);
 
-    // Start pinging the new host every 10 seconds
-    if (!pingIntervals[ip_address]) {
-      console.log(`Starting to ping new host: ${ip_address}`);
-      pingIntervals[ip_address] = setInterval(async () => {
-        try {
-          const pingResponse = await axios.post('http://python-api:5000/ping', { ips: [ip_address] });
-          const pingResult = pingResponse.data[ip_address];
+      connection.release();
 
-          const { success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms } = pingResult;
+      // Start pinging each new host every 10 seconds
+      if (!pingIntervals[ip_address]) {
+        console.log(`Starting to ping new host: ${ip_address}`);
+        pingIntervals[ip_address] = setInterval(async () => {
+          try {
+            const pingResponse = await axios.post('http://python-api:5000/ping', { ips: [ip_address] });
+            const pingResult = pingResponse.data[ip_address];
 
-          const connection = await pool.getConnection();
-          await connection.query(query, [
-            ip_address,
-            hostname,
-            department,  // Include department in the interval query as well
-            success_percentage,
-            packet_loss,
-            min_rtt_ms,
-            max_rtt_ms,
-            avg_rtt_ms
-          ]);
-          connection.release();
-        } catch (error) {
-          console.error(`Error pinging ${ip_address}:`, error);
-        }
-      }, 10000);  // Ping every 10 seconds
+            const { success_percentage, packet_loss, min_rtt_ms, max_rtt_ms, avg_rtt_ms } = pingResult;
+
+            const connection = await pool.getConnection();
+            await connection.query(query, [
+              ip_address,
+              hostname,
+              department,  // Include department in the interval query as well
+              success_percentage,
+              packet_loss,
+              min_rtt_ms,
+              max_rtt_ms,
+              avg_rtt_ms
+            ]);
+            connection.release();
+          } catch (error) {
+            console.error(`Error pinging ${ip_address}:`, error);
+          }
+        }, 10000);  // Ping every 10 seconds
+      }
     }
+
+    res.status(200).send({ message: 'Hosts added and ping results saved successfully' });
   } catch (error) {
     console.error('Error communicating with Flask API or saving to the database:', error);
     res.status(500).send('Error communicating with Flask API or saving to the database');
