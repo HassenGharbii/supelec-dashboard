@@ -1,0 +1,18 @@
+postman 
+POST http://localhost:5001/add-hosts 
+RAW json
+{
+  "hosts": [
+    { "ip_address": "172.30.0.16", "hostname": "2960X-HM.0.25-Surete-1", "department": "Surete" },
+    { "ip_address": "172.30.0.17", "hostname": "2960X-HM.0.25-Surete-2", "department": "Surete" },
+    { "ip_address": "172.30.0.18", "hostname": "2960X-VV.0.26-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.10", "hostname": "3850-HM.0.16-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.19", "hostname": "2960X-VV.0.82-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.20", "hostname": "2960X-D5.0.20-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.11", "hostname": "2960X-HM.0.16-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.12", "hostname": "2960X-Z1.S.05-Surete", "department": "Surete" },
+    { "ip_address": "172.30.0.21", "hostname": "2960X-F6.1.04-Surete-1", "department": "Surete" },
+    { "ip_address": "172.30.0.22", "hostname": "2960X-F6.1.04-Surete-2", "department": "Surete" },
+    { "ip_address": "172.30.0.13", "hostname": "2960X-Z2.S.11-Surete-1", "department": "Surete" }
+  ]
+}

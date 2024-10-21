@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "react-flow-renderer";
 import { Handle } from "react-flow-renderer";
 import axios from "axios";
+import { FaProjectDiagram } from 'react-icons/fa'; // Importing an icon for the title
+import logo2 from '../img/axone.png';
+
 import './ReactFlowStyles.css'; // Import the CSS file
 
 
@@ -2587,14 +2590,26 @@ const RDCDiagram = ({ switchers }) => {
         background: "#1F2937",
       }}
     >
-     <ReactFlow
-  nodes={nodes}
-  edges={edgesState}
-  fitView
-  proOptions={{ hideAttribution: true }}
->
-  <Background />
-</ReactFlow>
+      <div className="flex items-center space-x-2 mb-4">
+        <FaProjectDiagram className="text-2xl text-gray-400" />
+        <h1 className="text-xl font-semibold text-gray-300">Network Diagram</h1>
+      </div>
+
+      <ReactFlow
+        nodes={nodes}
+        edges={edgesState}
+        fitView
+        proOptions={{ hideAttribution: true }}
+      >
+        <Background />
+        <img
+          src={logo2}
+          alt="Axone Logo"
+          className="absolute bottom-0 right-0 m-4 w-32 h-auto "
+        />
+      </ReactFlow>
+
+
 
 
 

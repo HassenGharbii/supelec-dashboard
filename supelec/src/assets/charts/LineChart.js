@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-const LineChart = ({ title, data }) => {
+const LineChart = ({data }) => {
   // Separate the timestamp (pinged_at) and values
   const categories = data.map(entry => new Date(entry.pinged_at).toLocaleTimeString());
   const seriesData = data.map(entry => parseFloat(entry.value));
@@ -18,15 +18,7 @@ const LineChart = ({ title, data }) => {
       height: '100%',
       width: '100%',
     },
-    title: {
-      text: title,
-      align: 'left',
-      style: {
-        fontSize: '12px', // Reduced title font size
-        fontWeight: 'bold',
-        color: '#ffffff',
-      },
-    },
+ 
     stroke: {
       curve: 'smooth',
       width: 3, // Increase line width to make it more visible
@@ -65,8 +57,7 @@ const LineChart = ({ title, data }) => {
 
   const chartSeries = [
     {
-      name: title,
-      data: seriesData, // Set the metric values
+      data: seriesData// Set the metric values
     },
   ];
 
