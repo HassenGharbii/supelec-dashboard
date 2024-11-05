@@ -20,6 +20,12 @@ const switches = [
   { id: "2960X-F6.1.04-Surete-1", ip_address: "172.30.0.21" },
   { id: "2960X-F6.1.04-Surete-2", ip_address: "172.30.0.22" },
   { id: "2960X-Z2.S.11-Surete-1", ip_address: "172.30.0.13" },
+  { id: "2960X-Z2.S.11-Surete-2", ip_address: "172.30.0.23" },
+
+  { id: "2960X-Z3.S.24-Surete", ip_address: "172.30.0.14" },
+
+  { id: "2960X-Z4.S.06-Surete", ip_address: "172.30.0.15" },
+  { id: "3850-Batimentaire", ip_address: "172.30.0.1" },
 
 
   // Add more switches as needed
@@ -131,14 +137,14 @@ const initialNodes = [
     style: {
       width: 50,
       height: 100,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
     connectable: false,
   },
   {
-    id: "3850-Bâtimentaire",
+    id: "3850-batimentaire",
     data: {
       label: (
         <div style={{ color: "white", position: "relative" }}>
@@ -151,7 +157,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-            3850-Bâtimentaire
+            3850-batimentaire
 
           </div>
           <div
@@ -203,7 +209,7 @@ const initialNodes = [
     connectable: false,
   },
   {
-    id: "3850-Bâtimentaire-2",
+    id: "3850-batimentaire-2",
     data: {
       label: (
         <div style={{ color: "white", position: "relative" }}>
@@ -216,7 +222,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-            3850-Bâtimentaire-2
+            3850-batimentaire-2
 
           </div>
           <div
@@ -256,7 +262,7 @@ const initialNodes = [
     connectable: false,
   },
   {
-    id: "3850-Bâtimentaire-3",
+    id: "3850-batimentaire-3",
     data: {
       label: (
         <div style={{ color: "white", position: "relative" }}>
@@ -269,7 +275,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-            3850-Bâtimentaire-3
+            3850-batimentaire-3
 
           </div>
           <div
@@ -309,7 +315,7 @@ const initialNodes = [
     connectable: false,
   },
   {
-    id: "3850-Bâtimentaire-4",
+    id: "3850-batimentaire-4",
     data: {
       label: (
         <div style={{ color: "white", position: "relative" }}>
@@ -322,7 +328,7 @@ const initialNodes = [
               left: "30px",
             }}
           >
-            3850-Bâtimentaire-4
+            3850-batimentaire-4
 
           </div>
           <div
@@ -826,6 +832,7 @@ const initialNodes = [
               fontSize: "8px",
               fontWeight: "bold",
               position: "absolute",
+
               top: "-30px",
               left: "30px",
             }}
@@ -871,7 +878,7 @@ const initialNodes = [
     style: {
       width: 150,
       height: 20,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -1186,7 +1193,7 @@ const initialNodes = [
     style: {
       width: 80,
       height: 20,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -1261,7 +1268,7 @@ const initialNodes = [
     style: {
       width: 150,
       height: 20,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -1824,7 +1831,7 @@ const initialNodes = [
     style: {
       width: 100,
       height: 40,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -1929,7 +1936,7 @@ const initialNodes = [
     style: {
       width: 100,
       height: 40,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -2034,7 +2041,7 @@ const initialNodes = [
     style: {
       width: 100,
       height: 40,
-      backgroundColor: "rgba(255, 0, 0, 0.5)",
+      backgroundColor: "orange",
       border: "2px solid #EF4444",
       borderRadius: "10px",
     },
@@ -2503,7 +2510,7 @@ const edges = [
   {
     id: "f5-1",
     source: "fibre bouyague",
-    target: "3850-Bâtimentaire-2",
+    target: "3850-batimentaire-2",
     sourceHandle: "16", // Connect from handle 'a' of source node 1
     targetHandle: "1",
     type: "step", // Set the edge type to 'step' for 90-degree angles
@@ -2512,8 +2519,8 @@ const edges = [
   },
   {
     id: "f5-1",
-    source: "3850-Bâtimentaire-3",
-    target: "3850-Bâtimentaire",
+    source: "3850-batimentaire-3",
+    target: "3850-batimentaire",
     sourceHandle: "1", // Connect from handle 'a' of source node 1
     targetHandle: "2",
     type: "step", // Set the edge type to 'step' for 90-degree angles

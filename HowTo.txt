@@ -1,5 +1,5 @@
 postman 
-POST http://localhost:5001/add-hosts 
+POST http://localhost:5001/add-hosts
 RAW json
 {
   "hosts": [

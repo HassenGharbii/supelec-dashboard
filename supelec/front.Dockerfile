@@ -1,6 +1,6 @@
 # Dockerfile for React app
 
-# Use the official Node.js image with version 16 (or the version compatible with your app)
+# Use Node.js version 18
 FROM node:18-alpine
 
 # Set the working directory inside the container
@@ -8,6 +8,9 @@ WORKDIR /app
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./
+
+# Increase npm timeout (simple fix for network timeout issues)
+RUN npm config set fetch-timeout 120000
 
 # Install dependencies
 RUN npm install
